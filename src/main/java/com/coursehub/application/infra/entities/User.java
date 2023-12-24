@@ -1,12 +1,12 @@
-package com.coursehub.application.models;
+package com.coursehub.application.infra.entities;
+import com.coursehub.application.infra.DTO.UserDTO;
 import jakarta.persistence.*;
 
-import java.util.Objects;
 import java.util.UUID;
 
 @Entity
 @Table(name = "Users")
-public class Users {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = true, unique = true, nullable = false)
@@ -15,13 +15,20 @@ public class Users {
     private String email;
     private String telephone;
 
-    public Users() {}
+    public User() {}
 
-    public Users(UUID id, String name, String email, String telephone) {
+    public User(UUID id, String name, String email, String telephone) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.telephone = telephone;
+    }
+
+    public User(UserDTO dto) {
+        this.id = UUID.randomUUID();
+        this.email = dto.email;
+        this.name = dto.name;
+        this.telephone = dto.telephone;
     }
 
     public UUID getId() {

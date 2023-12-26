@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EntityScan("com.coursehub.application.infra.entities")
+@EntityScan("com.coursehub.application.domain.entities")
 @EnableJpaRepositories("com.coursehub.application.infra.repositories")
 @ComponentScan("com.coursehub.application")
 public class Application {

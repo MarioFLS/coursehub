@@ -1,7 +1,8 @@
 package com.coursehub.application.service;
 
-import com.coursehub.application.infra.DTO.UserDTO;
-import com.coursehub.application.infra.entities.User;
+import com.coursehub.application.domain.DTO.UserCreateDTO;
+import com.coursehub.application.domain.DTO.UserUpdateDTO;
+import com.coursehub.application.domain.entities.User;
 import com.coursehub.application.infra.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,22 +20,18 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User createUser(UserDTO userDto) {
+    public User createUser(UserCreateDTO userDto) {
         User user = new User(userDto);
         return userRepository.save(user);
     }
 
-    public Optional<User> updateUser(UUID id, UserDTO userDto) {
+    public Optional<User> updateUser(UUID id, UserUpdateDTO userDto) {
         Optional<User> optionalUser = userRepository.findById(id);
 
         if (optionalUser.isPresent()) {
-            User userFromDb = optionalUser.get();
-            userFromDb.setName(userDto.name);
-            userFromDb.setEmail(userDto.email);
-            userFromDb.setTelephone(userDto.telephone);
-
-            User userUpdate = userRepository.save(userFromDb);
-            return Optional.of(userUpdate);
+            User user = new User(userDto);
+            userRepository.save(user);
+            return Optional.of(user);
         }
         return optionalUser;
     }

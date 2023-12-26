@@ -1,5 +1,7 @@
-package com.coursehub.application.infra.entities;
-import com.coursehub.application.infra.DTO.UserDTO;
+package com.coursehub.application.domain.entities;
+
+import com.coursehub.application.domain.DTO.UserCreateDTO;
+import com.coursehub.application.domain.DTO.UserUpdateDTO;
 import jakarta.persistence.*;
 
 import java.util.UUID;
@@ -11,24 +13,46 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = true, unique = true, nullable = false)
     private UUID id;
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "email", nullable = false)
     private String email;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Column(name = "tax_identifier", nullable = false)
+    private String taxIdentifier;
+
+    @Column(name = "telephone", nullable = false)
     private String telephone;
 
-    public User() {}
+    public User() {
+    }
 
-    public User(UUID id, String name, String email, String telephone) {
+    public User(UUID id, String name, String email, String telephone, String password, String taxIdentifier) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.telephone = telephone;
+        this.password = password;
+        this.taxIdentifier = taxIdentifier;
     }
 
-    public User(UserDTO dto) {
+    public User(UserCreateDTO dto) {
         this.id = UUID.randomUUID();
         this.email = dto.email;
         this.name = dto.name;
         this.telephone = dto.telephone;
+        this.password = dto.password;
+        this.taxIdentifier = dto.taxIdentifier;
+    }
+
+    public User(UserUpdateDTO dto) {
+        if(dto.name.isPresent()) this.name = dto.name.get();
+        if(dto.telephone.isPresent()) this.telephone = dto.telephone.get();
+        if(dto.password.isPresent()) this.password = dto.password.get();
     }
 
     public UUID getId() {

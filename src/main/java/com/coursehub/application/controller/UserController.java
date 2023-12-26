@@ -1,7 +1,8 @@
 package com.coursehub.application.controller;
 
-import com.coursehub.application.infra.DTO.UserDTO;
-import com.coursehub.application.infra.entities.User;
+import com.coursehub.application.domain.DTO.UserCreateDTO;
+import com.coursehub.application.domain.DTO.UserUpdateDTO;
+import com.coursehub.application.domain.entities.User;
 import com.coursehub.application.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
@@ -24,13 +24,13 @@ public class UserController {
     }
 
     @PostMapping()
-    public ResponseEntity<User> createUser(@Valid @RequestBody UserDTO userDto) {
+    public ResponseEntity<User> createUser(@Valid @RequestBody UserCreateDTO userDto) {
         User user = userService.createUser(userDto);
         return ResponseEntity.ok(user);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable("id") String id, @Valid @RequestBody UserDTO userDto) {
+    public ResponseEntity<User> updateUser(@PathVariable("id") String id, @Valid @RequestBody UserUpdateDTO userDto) {
         try {
             UUID uuid = UUID.fromString(id);
 
@@ -65,7 +65,6 @@ public class UserController {
     public ResponseEntity<User> getUser(@PathVariable("id") String id) {
         try {
             UUID uuid = UUID.fromString(id);
-
             Optional<User> user = userService.getUser(uuid);
             if (user.isEmpty()) {
                 return ResponseEntity.notFound().build();

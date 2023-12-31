@@ -1,7 +1,6 @@
 package com.coursehub.application.domain.DTO;
 
 import com.coursehub.application.infra.annotation.NotBlankIfNotNull;
-import jakarta.validation.constraints.*;
 
 import java.util.Optional;
 
@@ -10,15 +9,29 @@ public class UserUpdateDTO {
     public Optional<String> name;
     @NotBlankIfNotNull(message = "O telefone não pode ser vazia.")
     public Optional<String> telephone;
-    @NotBlankIfNotNull(message = "A senha não pode ser vazia.")
-    @Min(value = 6, message = "A senha precisa ter no mínimo 6 caracteres.")
-    public Optional<String> password;
 
-    public UserUpdateDTO() {}
+    public UserUpdateDTO() {
+    }
 
-    public UserUpdateDTO(Optional<String> name, Optional<String> telephone, Optional<String> password) {
+    public UserUpdateDTO(Optional<String> name, Optional<String> telephone) {
         this.name = name;
         this.telephone = telephone;
-        this.password = password;
     }
+
+    public Optional<String> getName() {
+        return name;
+    }
+
+    public Optional<String> getTelephone() {
+        return telephone;
+    }
+
+    public void setName(Optional<String> name) {
+        this.name = name;
+    }
+
+    public void setTelephone(Optional<String> telephone) {
+        this.telephone = telephone;
+    }
+
 }

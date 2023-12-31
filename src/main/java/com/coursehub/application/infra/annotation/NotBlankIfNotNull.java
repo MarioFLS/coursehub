@@ -1,6 +1,6 @@
 package com.coursehub.application.infra.annotation;
 
-import com.coursehub.application.infra.Validators.NotBlankIfNotNullValidator;
+import com.coursehub.application.infra.validators.NotBlankIfNotNullValidator;
 import jakarta.validation.Constraint;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Target;

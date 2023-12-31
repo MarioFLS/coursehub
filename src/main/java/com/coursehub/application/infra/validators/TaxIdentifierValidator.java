@@ -1,4 +1,4 @@
-package com.coursehub.application.infra.Validators;
+package com.coursehub.application.infra.validators;
 
 import com.coursehub.application.infra.annotation.TaxIdentifier;
 import jakarta.validation.ConstraintValidator;

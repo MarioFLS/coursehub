@@ -18,7 +18,7 @@ public class UserCreateDTO {
     @Min(value = 6, message = "A senha precisa ter no mínimo 6 caracteres.")
     public String password;
 
-    @NotBlank(message = "O CPF não pode ser vazio.")
+    @NotBlank(message = "O CPF ou CNPJ não pode ser vazio.")
     @TaxIdentifier(message = "O CPF ou CNPJ precisa ser válido.")
     public String taxIdentifier;
 
